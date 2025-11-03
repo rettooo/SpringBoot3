@@ -15,7 +15,7 @@ import java.util.Map;
 @Controller
 public class IOCTestController {
 
-    public static final Logger logger = LoggerFactory.getLogger(DIController.class);
+    public static final Logger logger = LoggerFactory.getLogger(IOCTestController.class);
 
     @Autowired
     private PenService service;

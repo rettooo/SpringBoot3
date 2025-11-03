@@ -2,7 +2,9 @@ package kr.co.ureca.s3aop.config;
 
 import kr.co.ureca.s1di.controller.DIController;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -14,10 +16,10 @@ import java.util.Date;
 @Aspect
 @Component //bean에 등록
 public class AOPConfig {
-    public static final Logger logger = LoggerFactory.getLogger(DIController.class);
+    public static final Logger logger = LoggerFactory.getLogger(AOPConfig.class);
 
     //모든 return 타입/ kr.co.ureca.모든 클래스.controller -> class, method, argument
-    @Before("execution(* kr.co.ureca.*.controller.*.*(..))")
+    //@Before("execution(* kr.co.ureca.*.controller.*.*(..))")
     public void aopBefore(JoinPoint joinPoint){
         logger.info(">>> AOP before start <<<");
         logger.info(joinPoint.toString()); //어떤 정보?
@@ -27,11 +29,29 @@ public class AOPConfig {
 
     }//aopBefore
 
-    @After("execution(* kr.co.ureca.*.controller.*.*(..))")
+    //@After("execution(* kr.co.ureca.*.controller.*.*(..))")
     public void aopAfter(JoinPoint joinPoint){
         logger.info(">>> AOP after start <<<");
         logger.info(joinPoint.toString());
         logger.info("AOP After time: " + new Date().toString());
         logger.info(">>> AOP after end <<<");
+    }//aopAfter
+
+    @Around("execution(* kr.co.ureca.*.controller.*.*(..))")
+    public Object aopAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        logger.info(">>> AOP around after start <<<");
+        logger.info(joinPoint.toString());
+        AOPAroundWork work = new AOPAroundWork(); //config 주입
+        work.beforeMethod();
+
+        Object result = joinPoint.proceed();
+
+        work.afterMethod();
+        logger.info( "AOPAroundWork: "+ result.toString());
+
+        logger.info(">>> AOP around end <<<");
+        return result;
+
     }
+
 }
