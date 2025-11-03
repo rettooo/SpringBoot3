@@ -41,7 +41,9 @@ public class DIController {
 //        this.service = service;
 //    }
 
-    //4.
+    //4.필드 선언에 의한 자동 의존성 주입
+    @Autowired
+    private DIService service;
 
 
 
@@ -50,7 +52,8 @@ public class DIController {
     public Map<String, String> diTest(){ //객체 리턴
 //        logger.info("1. 17 line 개발자가 DIService 객체 주입 ");
 //        logger.info("2.생성자에 의한 자동 의존성 주입 ");
-        logger.info("3. setter method에 의한 자동 의존성 주입 ");
+//        logger.info("3. setter method에 의한 자동 의존성 주입 ");
+        logger.info("4. 필드 선언에 의한 자동 의존성 주입 ");
         Map<String, String> map = service.diTest();
         return map;
     }
