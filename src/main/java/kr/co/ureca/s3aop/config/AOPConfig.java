@@ -2,6 +2,7 @@ package kr.co.ureca.s3aop.config;
 
 import kr.co.ureca.s1di.controller.DIController;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -25,4 +26,12 @@ public class AOPConfig {
         logger.info(">>> AOP before end <<<");
 
     }//aopBefore
+
+    @After("execution(* kr.co.ureca.*.controller.*.*(..))")
+    public void aopAfter(JoinPoint joinPoint){
+        logger.info(">>> AOP after start <<<");
+        logger.info(joinPoint.toString());
+        logger.info("AOP After time: " + new Date().toString());
+        logger.info(">>> AOP after end <<<");
+    }
 }
