@@ -21,20 +21,20 @@ public class DIController {
 
     public static final Logger logger = LoggerFactory.getLogger(DIController.class);
 
-    //1. DI 추가 -> 옛날 방식
-    //private DIService service = new DIService(); //개발자가 객체 주입을 해야함.
-
-    //2. 생성자에 의한 의존성 주입
-    // 생성자가 실행될때 ->DiService가 필요함. => Spring이 생성하고 제공한다.
-    // 공식적으로 권장되는 방식이다.
-    // why? 의존객체(DIService)가 없으면, DIController 생성 불가
+//    1. DI 추가 -> 옛날 방식
+//    private DIService service = new DIService(); //개발자가 객체 주입을 해야함.
+//
+//    2. 생성자에 의한 의존성 주입
+//     생성자가 실행될때 ->DiService가 필요함. => Spring이 생성하고 제공한다.
+//     공식적으로 권장되는 방식이다.
+//     why? 의존객체(DIService)가 없으면, DIController 생성 불가
 //    private DIService service;
 //
 //    public DIController(DIService service) {
 //        this.service = service;
 //    }
-
-    //3.  Setter method에 의한 자동 의존성 주입
+//
+//    3.  Setter method에 의한 자동 의존성 주입
 //    private DIService service;
 //    @Autowired //현재 객체(DIController)가 실행될 때, Service가 자동으로 실행 및 제공
 //    public void setService(DIService service){
